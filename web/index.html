@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ayah Feedback Lab</title>
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js" defer></script>
+</head>
+<body>
+<header class="mast"><div class="brand"><span class="mark" aria-hidden="true">✦</span> AYAH FEEDBACK LAB</div><span class="tag">CPU speech ML experiment</span></header>
+<main>
+  <section class="hero">
+    <p class="eyebrow">QURAN RECITATION · SURAH AL-IKHLAS</p>
+    <h1>When the words match,<br>check the sound.</h1>
+    <p>Compare a Quran-tuned speech recognizer with a trained acoustic verifier for final د qalqalah in Al-Ikhlas 112:1–2.</p>
+  </section>
+  <section class="card experiment" aria-labelledby="experiment-title">
+    <div><p class="eyebrow">HELD-OUT EVALUATION</p><h2 id="experiment-title">How did the models compare?</h2>
+    <p class="hint" id="experiment-summary" role="status">Loading experiment results…</p></div>
+    <div class="experiment-data" id="experiment-data" hidden>
+      <table>
+        <thead><tr><th scope="col">Signal</th><th scope="col">Target errors flagged</th><th scope="col">False flags</th><th scope="col">Review</th></tr></thead>
+        <tbody id="experiment-rows"></tbody>
+      </table>
+    </div>
+  </section>
+  <div class="grid">
+    <section class="card" aria-labelledby="input-title">
+      <p class="eyebrow">01 / INPUT</p>
+      <h2 id="input-title">Practice an ayah</h2>
+      <label for="ayah">Ayah</label><select id="ayah"></select>
+      <p id="verse" class="verse" lang="ar" dir="rtl"></p>
+      <div class="actions">
+        <button type="button" id="record" class="primary">Record audio</button>
+        <label class="button" for="file">Upload audio</label>
+        <input class="file" type="file" id="file" accept="audio/*,.webm,.m4a">
+      </div>
+      <audio id="playback" controls preload="metadata" aria-label="Replay your audio clip" hidden></audio>
+      <p class="hint" id="record-note">Record up to 20 seconds or upload a short clip. Audio is processed on this computer.</p>
+      <details>
+        <summary>Try without audio</summary>
+        <p class="hint">These examples test word alignment using prepared transcripts.</p>
+        <div class="actions" id="examples"></div>
+        <form id="text-form">
+          <label for="transcript">Or enter an Arabic transcript</label>
+          <textarea lang="ar" dir="rtl" id="transcript" rows="2" maxlength="1500" required></textarea>
+          <button type="submit">Compare transcript</button>
+        </form>
+      </details>
+    </section>
+    <section class="card result" aria-labelledby="result-title">
+      <p class="eyebrow">02 / FEEDBACK</p>
+      <h2 id="result-title">Word comparison</h2>
+      <p id="status" role="status" aria-live="polite">Choose an input to begin.</p>
+      <div id="output" hidden>
+        <dl class="stats"><div><dt>Mode</dt><dd id="mode"></dd></div><div><dt>Word edit rate</dt><dd id="distance"></dd></div><div><dt>Inference</dt><dd id="latency"></dd></div></dl>
+        <p class="hint">Input transcript</p>
+        <p id="heard" lang="ar" dir="rtl"></p>
+        <table id="comparison">
+          <thead><tr><th scope="col">Expected</th><th scope="col">Heard</th><th scope="col">Alignment</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+      <aside id="acoustic" class="acoustic" hidden>
+        <p class="eyebrow">ACOUSTIC VERIFIER · FINAL د</p>
+        <p id="acoustic-status" role="status"></p>
+        <p class="hint" id="acoustic-score"></p>
+      </aside>
+      <p class="hint footer-note">Wording and the acoustic result are separate signals. The verifier only covers one rule on ayahs 112:1 and 112:2.</p>
+    </section>
+  </div>
+  <section class="card checks">
+    <div><p class="eyebrow">03 / EVALUATION</p><h2>Alignment checks</h2>
+    <p class="hint">Deterministic transcript and retry cases. Measure speech recognition separately on labeled recordings.</p></div>
+    <button id="check" type="button">Run checks</button>
+    <p id="check-summary" role="status"></p>
+    <ul id="check-results"></ul>
+  </section>
+</main>
+</body>
+</html>

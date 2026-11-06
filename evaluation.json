@@ -1,0 +1,173 @@
+{
+  "seed": 2026,
+  "numpy": "2.5.4",
+  "sklearn": "1.8.0",
+  "dataset_metadata_sha256": "ce3a98b32c4495860a5122b83a2b57d505035dca5aae2193bb0673c90a5931f2",
+  "data_audit": {
+    "duplicate_metadata_rows_removed": 1,
+    "duplicate_pcm_rows_removed": 6,
+    "low_signal_rows": 2
+  },
+  "splits": {
+    "train": {
+      "clips": 427,
+      "participant_ids": 226,
+      "error_clips": 208
+    },
+    "validation": {
+      "clips": 143,
+      "participant_ids": 76,
+      "error_clips": 70
+    },
+    "test": {
+      "clips": 144,
+      "participant_ids": 76,
+      "error_clips": 70
+    }
+  },
+  "validation_runs": [
+    {
+      "crop": "tail",
+      "C": 0.01,
+      "auc": 0.7979879275653924
+    },
+    {
+      "crop": "tail",
+      "C": 0.1,
+      "auc": 0.8044265593561368
+    },
+    {
+      "crop": "tail",
+      "C": 1.0,
+      "auc": 0.7953722334004024
+    },
+    {
+      "crop": "short",
+      "C": 0.01,
+      "auc": 0.7758551307847084
+    },
+    {
+      "crop": "short",
+      "C": 0.1,
+      "auc": 0.7668008048289738
+    },
+    {
+      "crop": "short",
+      "C": 1.0,
+      "auc": 0.7625754527162978
+    }
+  ],
+  "selected_validation_auc": 0.8044265593561368,
+  "test_auc": 0.8052123552123551,
+  "test_head_control_auc": 0.6474903474903475,
+  "test": {
+    "correct_clips": 74,
+    "error_clips": 70,
+    "true_flags": 38,
+    "false_flags": 13,
+    "false_passes": 23,
+    "correct_passes": 57,
+    "review_correct": 4,
+    "review_errors": 9
+  },
+  "test_by_ayah": {
+    "1": {
+      "correct_clips": 38,
+      "error_clips": 32,
+      "true_flags": 17,
+      "false_flags": 11,
+      "false_passes": 10,
+      "correct_passes": 24,
+      "review_correct": 3,
+      "review_errors": 5
+    },
+    "2": {
+      "correct_clips": 36,
+      "error_clips": 38,
+      "true_flags": 21,
+      "false_flags": 2,
+      "false_passes": 13,
+      "correct_passes": 33,
+      "review_correct": 1,
+      "review_errors": 4
+    }
+  },
+  "stress_tests": {
+    "gain_minus_12_db": {
+      "correct_clips": 74,
+      "error_clips": 70,
+      "true_flags": 36,
+      "false_flags": 13,
+      "false_passes": 23,
+      "correct_passes": 56,
+      "review_correct": 5,
+      "review_errors": 11
+    },
+    "white_noise_12_db_snr": {
+      "correct_clips": 74,
+      "error_clips": 70,
+      "true_flags": 33,
+      "false_flags": 10,
+      "false_passes": 12,
+      "correct_passes": 40,
+      "review_correct": 24,
+      "review_errors": 25
+    },
+    "active_end_minus_120_ms": {
+      "correct_clips": 74,
+      "error_clips": 70,
+      "true_flags": 47,
+      "false_flags": 19,
+      "false_passes": 17,
+      "correct_passes": 43,
+      "review_correct": 12,
+      "review_errors": 6
+    }
+  },
+  "whisper_baseline": {
+    "final_word_proxy": {
+      "correct_clips": 74,
+      "error_clips": 70,
+      "true_flags": 31,
+      "false_flags": 10,
+      "false_passes": 39,
+      "correct_passes": 64,
+      "review_correct": 0,
+      "review_errors": 0
+    },
+    "any_word_difference_proxy": {
+      "correct_clips": 74,
+      "error_clips": 70,
+      "true_flags": 40,
+      "false_flags": 13,
+      "false_passes": 30,
+      "correct_passes": 61,
+      "review_correct": 0,
+      "review_errors": 0
+    },
+    "inference_ms": {
+      "median": 1028.0,
+      "p95": 1095.7
+    }
+  },
+  "held_out_examples": {
+    "whisper_wording_match_acoustic_flag": {
+      "audio": "data/ID12V1F.wav",
+      "ayah": "112:1",
+      "label": "1",
+      "acoustic_score": "0.7718717232198795",
+      "verdict": "flag",
+      "whisper_status": "match",
+      "whisper_transcript": "\u0642\u064f\u0644\u0652 \u0647\u064f\u0648\u064e \u0627\u0644\u0644\u0651\u064e\u0647\u064f \u0623\u064e\u062d\u064e\u062f\u064c"
+    },
+    "acoustic_false_flag": {
+      "audio": "data/ID15V1T.wav",
+      "ayah": "112:1",
+      "label": "0",
+      "acoustic_score": "0.6096782604586023",
+      "verdict": "flag",
+      "whisper_status": "difference",
+      "whisper_transcript": "\u0648\u064e\u0627\u0644\u0644\u0651\u064e\u0647\u064f \u0648\u064e\u062d\u064e\u062f\u064c"
+    }
+  }
+}
