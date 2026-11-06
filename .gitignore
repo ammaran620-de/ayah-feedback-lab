@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+.pytest_cache/
+dataset-cache/
+demo-clips/
+runs/
+*.wav
+*.mp3
+*.m4a
+*.webm
+*.zip
+.DS_Store
