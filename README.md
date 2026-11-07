@@ -2,13 +2,23 @@
 
 **Can a speech model recognize every word of an ayah and still miss a pronunciation error?**
 
-Ayah Feedback Lab compares a Quran-tuned Whisper wording baseline with a trained acoustic classifier for one narrowly defined task: flagging a possible **final د qalqalah issue** in Al-Ikhlas **112:1** (أَحَدٌ) and **112:2** (ٱلصَّمَدُ). Record or upload a clip and inspect the two signals side by side. The app runs locally on CPU after setup.
+Ayah Feedback Lab is a browser-based research prototype for Quran recitation feedback. Record or upload a single ayah to compare two signals side by side: what a Quran-tuned Whisper model transcribed and whether a trained acoustic classifier detected a possible issue with final **د** qalqalah.
 
-> Independent speech ML experiment. The verifier covers one rule on two ayahs. Its output is a research signal for review.
+The experiment focuses on two verses from Surah Al-Ikhlas: **112:1** (أَحَدٌ) and **112:2** (ٱلصَّمَدُ). After setup, the app runs on CPU without an API key or GPU.
+
+## What the demo shows
+
+| In the app | What you can inspect |
+| --- | --- |
+| **Wording check** | Missing, substituted, or extra words compared with the selected ayah. |
+| **Acoustic check** | A flag, no flag, or review result based on acoustic features near the end of the recitation. |
+| **Held-out examples** | A clip where Whisper matched the wording and the acoustic model flagged the target issue, plus a correctly labeled clip that the acoustic model flagged in error. |
+
+> The verifier covers one pronunciation rule on two ayahs. Its output is intended for review with a qualified teacher.
 
 ## Results on held-out recordings
 
-The benchmark uses **144 held-out clips from 76 dataset participant IDs**. The split contains 70 clips with the target error and 74 labeled correct. Six configurations competed on the validation fold. The selected model used a 600 ms speech tail, logistic regularization `C = 0.1`, and review thresholds of 0.45 and 0.60.
+The benchmark uses **144 held-out clips from 76 dataset participant IDs**. The split contains 70 clips with the target error and 74 labeled correct. Six configurations were compared on the validation fold. The selected model used a 600 ms speech tail, logistic regularization `C = 0.1`, and review thresholds of 0.45 and 0.60.
 
 | Signal | Target errors flagged | False flags on correct clips | Sent to review |
 | --- | ---: | ---: | ---: |
@@ -31,7 +41,7 @@ The model is suitable for demonstrating the experiment and inspecting errors. It
 
 [Full metrics, validation runs, stress tests and example cases](evaluation.json)
 
-## Run the demo
+## Run locally
 
 Use Python 3.12. From the project directory on Windows PowerShell:
 
@@ -43,11 +53,13 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe app.py
 ```
 
-On macOS or Linux, create the environment with `python3.12 -m venv .venv` and use `.venv/bin/python` in place of the Windows interpreter path. Open **http://127.0.0.1:8765** in Chrome or Edge. Internet is needed for the first dependency, checkpoint and example downloads. No API key or GPU is required. Microphone and upload inputs accept one ayah per clip.
+On macOS or Linux, create the environment with `python3.12 -m venv .venv` and use `.venv/bin/python` in place of the Windows interpreter path. After the server starts, open the address printed in your terminal in Chrome or Edge. Internet is needed for the first dependency, checkpoint and example downloads. No API key or GPU is required. Microphone and upload inputs accept one ayah per clip.
 
-1. **Start with the held-out disagreement.** Select the ayah printed by `prepare_samples.py --held-out` and upload the file beginning with `whisper_wording_match_acoustic_flag`. Compare the wording match with the acoustic flag and the expert label in the evaluation report.
-2. **Show the false flag.** Upload the file beginning with `acoustic_false_flag` using its printed ayah. This clip is labeled correct and shows why the acoustic score needs review.
-3. **Show the wording checks.** Under **Try without audio**, compare a correct transcript and a skipped-word transcript. **Run checks** exercises alignment and retry cases. These fixtures are separate from the audio benchmark.
+### What to try
+
+1. **Start with a case where the models disagree.** Select the ayah printed by `prepare_samples.py --held-out` and upload the file beginning with `whisper_wording_match_acoustic_flag`. Compare the wording match with the acoustic flag and the expert label in the evaluation report.
+2. **Inspect a false flag.** Upload the file beginning with `acoustic_false_flag` using its printed ayah. This clip is labeled correct and shows why the acoustic score needs review.
+3. **Try the wording checks.** Under **Try without audio**, compare a correct transcript and a skipped-word transcript. **Run checks** exercises alignment and retry cases. These fixtures are separate from the audio benchmark.
 
 For a standard recitation, synthetic word omission and silence, run `python prepare_samples.py` without flags. If audio setup is unavailable, `python app.py` runs the transcript path with the Python standard library.
 
@@ -88,7 +100,7 @@ Use the environment interpreter from the setup section for `python`. The downloa
 
 ## Scope and limitations
 
-This is a known-ayah, post-clip experiment. The model score is uncalibrated and can be affected by mic quality, background noise, clipped endings, and differences across reciters. The held-out split comes from one public dataset. A stronger deployment study would use independently collected learner recordings, verify speaker separation, and test other pronunciation errors as explicit negative examples. Feedback is intended for review with a qualified teacher.
+This is a known-ayah, post-clip experiment. The model score is uncalibrated and can be affected by mic quality, background noise, clipped endings, and differences across reciters. The held-out split comes from one public dataset. A stronger deployment study would use independently collected learner recordings, verify speaker separation, and test other pronunciation errors as explicit negative examples.
 
 ## Data and model credits
 
