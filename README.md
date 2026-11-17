@@ -107,3 +107,8 @@ This is a known-ayah, post-clip experiment. The model score is uncalibrated and 
 - Maghraby et al., *Surah Al-Ikhlas of the Holy Qur'an Error Detection Dataset*, Mendeley Data (2024), [DOI 10.17632/sxtmmr6mvk.1](https://doi.org/10.17632/sxtmmr6mvk.1), CC BY 4.0. The experiment uses the [Hugging Face packaging](https://huggingface.co/datasets/MuazAhmad7/Surah_Ikhlas-Labeled_Dataset).
 - [Tarteel AI Quran Whisper](https://huggingface.co/tarteel-ai/whisper-base-ar-quran) and [OdyAsh CTranslate2 conversion](https://huggingface.co/OdyAsh/faster-whisper-base-ar-quran).
 - [Quran.com Al-Ikhlas reference text](https://quran.com/112) and [EveryAyah Alafasy audio](https://everyayah.com/data/Alafasy_128kbps/112001.mp3) for the optional synthetic controls.
+
+
+## Licence
+
+The code in this repository is released under the MIT licence (`LICENSE`). That licence does not cover third-party material: the Al-Ikhlas dataset (CC BY 4.0, credited above), the Tarteel and OdyAsh Whisper models, and the Quran.com and EveryAyah reference text and audio each keep their own terms. `verifier_model.json` was trained on that dataset, so treat it as derived from CC BY 4.0 material and credit the dataset if you reuse it. I have not been able to confirm the licences of the two model repositories from here, so check them before reusing the models.
